@@ -99,6 +99,13 @@ tbody td{padding:9px 11px;text-align:right;border-bottom:1px solid #F1F5FA;verti
 tbody td:first-child{text-align:left;white-space:normal;font-weight:600;color:var(--navy);min-width:130px}
 tbody tr:last-child td{border-bottom:none}
 tbody tr.tot td{background:#F7F9FD;font-weight:700;color:var(--navy)}
+.mcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(212px,1fr));gap:11px;margin-bottom:4px}
+.mc2{background:#F7F9FD;border-left:4px solid var(--mc);border-radius:0 13px 13px 0;padding:14px 16px 15px}
+.mc2 .l{font-size:12.5px;font-weight:700;color:var(--navy)}
+.mc2 .v{font-size:25px;font-weight:800;color:var(--mc);letter-spacing:-.7px;line-height:1.15;margin-top:5px}
+.mc2 .p{font-size:11.5px;font-weight:700;color:var(--mc);margin-top:3px}
+.mbar{height:7px;border-radius:5px;background:#E8EDF6;margin-top:9px;overflow:hidden}
+.mbar i{display:block;height:100%;border-radius:5px;background:var(--mc)}
 tbody tr.wait td{background:#FBFCFE;color:#AFB9C8}
 tbody tr.wait td b{color:#AFB9C8;font-weight:600}
 tbody tr.grp td{background:#FAFBFE;font-weight:700;color:#5A6B86;font-size:11.5px;letter-spacing:.2px}
@@ -307,6 +314,8 @@ tbody tr.expanel .tw{border-color:#DCE4F0}
 /* ---------- action plan checkbox ---------- */
 .apck{width:18px;height:18px;accent-color:var(--green);cursor:pointer;vertical-align:middle}
 td.aptask{text-align:left !important;white-space:normal;font-weight:600;color:var(--navy);min-width:180px}
+td.apwhy,td.apres{text-align:left !important;white-space:normal;font-weight:500;color:#3E4A5C;font-size:12px;line-height:1.6;min-width:190px}
+td.apres{color:#6B5A2E;background:#FFFCF5}
 td.aptask.done{text-decoration:line-through;color:#9AA5B5}
 
 /* ---------- action plan fields ---------- */
@@ -778,11 +787,8 @@ const WEEKS = [
             ['แท็บเล็ต',{n:15.93,dec:2},{n:5,dec:0},{n:42,dec:0},{n:1.1,dec:1,suf:'%'}]],
       tot:['รวม',{n:1483.38,dec:2},{n:253,dec:0},{n:2733,dec:0},{n:100.0,dec:1,suf:'%'}]}],
 
-    changes:[['ทั้งสัปดาห์','ยิงเฉพาะกรุงเทพฯ ต่อเนื่องจากการเปลี่ยนเมื่อ 28 ก.ย. — สัปดาห์แรกที่ได้ข้อมูลเต็ม 7 วัน'],
-             ['ไม่ระบุวัน','มีคีย์เวิร์ดใหม่เข้ามาในกลุ่ม 02 เช่น วรจักร · อะไหล่ TOYOTA · อะไหล่ MG · อะไหล่แท้ ']],
-
-
-
+    changes:[['ทั้งสัปดาห์','<b>ยิงเฉพาะกรุงเทพฯ</b> ต่อเนื่องจากการเปลี่ยนเมื่อ 28 ก.ย.','สัปดาห์แรกที่ได้ข้อมูลเต็ม 7 วัน ใช้เป็นฐานเทียบสัปดาห์ถัดไปได้'],
+             ['ไม่ระบุวัน','<b>มีคีย์เวิร์ดใหม่เข้ากลุ่ม 02</b> เช่น วรจักร · อะไหล่ TOYOTA · อะไหล่ MG · อะไหล่แท้','รวมเป็น 26 คำ แต่ 7 คำยังไม่มีการแสดงผลเลย']],
     cal:{title:'ปฏิทินการแก้ไข · Website WPC', note:'ปักหมุดเฉพาะเหตุการณ์ที่เกิดในสัปดาห์นี้ · 1–8 ต.ค. 2569',
       lastData:7,
       events:{
@@ -791,9 +797,11 @@ const WEEKS = [
       legend:[['#EDE9FA','Google Ads'],['#FDECEC','ปิด / ยกเลิกการตั้งค่า'],['#FFF1DB','รอบประเมิน']]},
 
     plan:{title:'Action Plan · Website WPC',
-      note:'เลือกสถานะ กรอกวันที่และหมายเหตุได้เอง · ติ๊กช่องซ้ายแล้วสถานะจะเปลี่ยนเป็น “เสร็จสิ้น” อัตโนมัติ',
+      note:'ติ๊กช่องซ้ายแล้วสถานะจะเปลี่ยนเป็น “เสร็จสิ้น” อัตโนมัติ · กรอกวันที่และหมายเหตุได้เอง',
       rows:[
-       ['ปรับหน้าเว็บปลายทางให้โหลดเร็วและตรงกับคำค้น']
+       ['<b>ปรับหน้าเว็บปลายทางให้โหลดเร็วและตรงกับคำค้น</b>',
+        '253 คนเข้าเว็บ กด LINE แค่ 3 ไม่มีใครใส่ตะกร้า',
+        'คนทัก LINE มากขึ้นโดยไม่ต้องเพิ่มงบ']
       ]}}
   ]}
  ]}
@@ -861,11 +869,9 @@ const WEEKS = [
        ['[FAMILY SET] LUCK ผ้าขนหนูอัจฉริยะ Gataway',{n:1089.63,dec:2},{n:16168,dec:0},{n:14.84,dec:2},{n:8.01,dec:2},{n:9,dec:0},{n:10,dec:0},{n:242,dec:0},{n:7131,dec:0},{n:3.39,dec:2,suf:'%'}]],
       note:'สัปดาห์ที่แล้วยังไม่มีออเดอร์เลย สัปดาห์นี้ขึ้นมาเป็นแคมเปญที่ ROAS สูงสุดของบัญชี'}],
 
-    changes:[['14 ต.ค.','<b>เปลี่ยนรูปภาพและรายละเอียดสินค้ากลุ่มสินค้าเด็ก</b> สลับหน้าปกขึ้นมาใหม่เกือบทุกตัว ยกเว้นเซตของขวัญเครื่องนอนแรกเกิด (Journey Bag) ที่เปลี่ยนเฉพาะรายละเอียดสินค้า · พักแคมเปญกลุ่มสินค้าเด็กระหว่างแก้ แล้วเปิดกลับตามปกติ'],
-             ['ทั้งสัปดาห์','<b>งบรายวันและเป้า ROAS ไม่ได้เปลี่ยนเลย</b> ตรวจในบัญชีเมื่อ 16 ต.ค. แล้ว — กลุ่มผ้าขนหนู ฿500/วัน เป้า 7.0 · กลุ่มสินค้าเด็ก ฿500/วัน เป้า 5.2 · Swift Wrap ฿100/วัน เป้า 5.0 · Gataway Family Set ฿100/วัน เป้า 5.8 · ทั้ง 4 แคมเปญสถานะกำลังโฆษณา ไม่มีตัวไหนค้างสถานะพัก'],
-             ['ทั้งสัปดาห์','ไม่ได้เปลี่ยนราคา ส่วนลด voucher ชื่อสินค้า หรือสต็อก จึงไม่มีปัจจัยอื่นปนในตัวเลข ROAS ของสัปดาห์นี้']],
-
-
+    changes:[['14 ต.ค.','<b>เปลี่ยนรูปและรายละเอียดสินค้ากลุ่มสินค้าเด็ก</b> สลับหน้าปกใหม่เกือบทุกตัว ยกเว้น Journey Bag ที่เปลี่ยนเฉพาะรายละเอียด · พักแคมเปญระหว่างแก้','วันนั้นทั้ง 4 แคมเปญไม่ได้ออเดอร์เลย งบถูกระบบลดเหลือ ฿297.19 · 15 ต.ค. กลับมา ROAS 9.01 · สรุปได้หลัง 21 ต.ค.'],
+             ['ทั้งสัปดาห์','<b>งบรายวันและเป้า ROAS ไม่ได้เปลี่ยนเลย</b> ตรวจในบัญชีเมื่อ 16 ต.ค.','ROAS ที่ขึ้นจาก 6.31 เป็น 7.09 มาจากตัวแคมเปญเอง ไม่ใช่เพราะเราไปปรับ'],
+             ['ทั้งสัปดาห์','<b>ไม่ได้เปลี่ยนราคา ส่วนลด voucher ชื่อสินค้า หรือสต็อก</b>','ไม่มีปัจจัยอื่นปนในตัวเลข ROAS ของสัปดาห์นี้']],
     cal:{title:'ปฏิทินการแก้ไข · Shopee LUCK', note:'ปักหมุดเฉพาะเหตุการณ์ที่เกิดในสัปดาห์นี้ · 9–15 ต.ค. 2569',
       lastData:15,
       events:{
@@ -876,9 +882,11 @@ const WEEKS = [
       legend:[['#E6EEFA','การแก้ไขแอด'],['#EAF3EC','เปิดรอบใหม่ · เติมเครดิต'],['#FDECEC','หยุด / สิ้นสุดรอบ'],['#FFF1DB','รอบประเมิน']]},
 
     plan:{title:'Action Plan · Shopee LUCK',
-      note:'เลือกสถานะ กรอกวันที่และหมายเหตุได้เอง · ติ๊กช่องซ้ายแล้วสถานะจะเปลี่ยนเป็น “เสร็จสิ้น” อัตโนมัติ',
+      note:'ติ๊กช่องซ้ายแล้วสถานะจะเปลี่ยนเป็น “เสร็จสิ้น” อัตโนมัติ · กรอกวันที่และหมายเหตุได้เอง',
       rows:[
-       ['<b>ติดตามผลหลังเปลี่ยนรูปสินค้าเด็กให้ครบ 7 วัน</b> ถึง 21 ต.ค. แล้วเทียบ CTR และอัตราการสั่งซื้อก่อนกับหลัง']
+       ['<b>ติดตามผลหลังเปลี่ยนรูปสินค้าเด็กให้ครบ 7 วัน</b> เก็บข้อมูลถึง 21 ต.ค. แล้วเทียบ CTR และอัตราการสั่งซื้อก่อนกับหลัง',
+        'ROAS 2.05 ต่ำกว่าเป้า 5.2 · Direct ROAS 0.00 · CTR 2.70% ต่ำสุดใน 4 แคมเปญ',
+        'รู้ว่าปัญหาอยู่ที่รูปหรือที่ราคา แล้วตัดสินใจได้ว่าจะแก้ต่อหรือหยุดเทงบกลุ่มนี้']
       ]}},
 
    {name:'IG LUCK', key:'iglk', nosub:1, noweek:1, sub:'พักไว้ก่อน · เดือนนี้ไม่ยิงแอด', icon:'ig', color:'#C13584', tag:['พัก · ยังไม่ยิงแอด','bd'],
@@ -892,9 +900,11 @@ const WEEKS = [
       },
       legend:[['#E6EEFA','การวางแผน / แก้ไขแอด'],['#EAF3EC','เริ่มรอบใหม่'],['#FDECEC','สิ้นสุดรอบ'],['#FFF1DB','รอบประเมิน']]},
     plan:{title:'Action Plan · IG LUCK',
-      note:'เลือกสถานะ กรอกวันที่และหมายเหตุได้เอง · ติ๊กช่องซ้ายแล้วสถานะจะเปลี่ยนเป็น “เสร็จสิ้น” อัตโนมัติ',
+      note:'ติ๊กช่องซ้ายแล้วสถานะจะเปลี่ยนเป็น “เสร็จสิ้น” อัตโนมัติ · กรอกวันที่และหมายเหตุได้เอง',
       rows:[
-       ['<b>พักการยิงแอด IG ของ LUCK</b> พี่ลี่ให้พักไว้ก่อน เดือนนี้ไม่ยิง · งานวิเคราะห์โพสต์และตัวเลือก ก/ข เก็บไว้ในแท็บแผนยิงแอด รอปลดพัก']
+       ['<b>พักการยิงแอด IG ของ LUCK</b> หยุดยิงทั้งเดือน เก็บงานวิเคราะห์โพสต์และตัวเลือก ก/ข ไว้รอปลดพัก',
+        'พี่ลี่ให้พักไว้ก่อน เดือนนี้ไม่ยิง',
+        'ประหยัดงบส่วนนี้ไปลงช่องทางที่ได้ผล · ก.ย. ใช้ ฿5,696.51 เดือนนี้ ฿0']
       ]}}
   ]},
 
@@ -947,9 +957,11 @@ const WEEKS = [
       },
       legend:[['#E6EEFA','การวางแผน / แก้ไขแอด'],['#EAF3EC','เริ่มรอบใหม่'],['#FDECEC','สิ้นสุดรอบ'],['#FFF1DB','รอบประเมิน']]},
     plan:{title:'Action Plan · IG ATELIER',
-      note:'เลือกสถานะ กรอกวันที่และหมายเหตุได้เอง · ติ๊กช่องซ้ายแล้วสถานะจะเปลี่ยนเป็น “เสร็จสิ้น” อัตโนมัติ',
+      note:'ติ๊กช่องซ้ายแล้วสถานะจะเปลี่ยนเป็น “เสร็จสิ้น” อัตโนมัติ · กรอกวันที่และหมายเหตุได้เอง',
       rows:[
-       ['ครบ 7 วัน เทียบต้นทุนต่อโปรไฟล์ของสองโพสต์ แล้วตัดตัวที่แพงกว่า']
+       ['<b>ครบ 7 วัน เทียบต้นทุนต่อโปรไฟล์ของสองโพสต์</b> รอถึง 21 ต.ค. แล้วตัดตัวที่แพงกว่า',
+        'วันแรกโพสต์ 1 ฿0.65 โพสต์ 2 ฿1.34 แพงกว่าเท่าตัว แต่มีข้อมูลแค่วันเดียว',
+        'ถ้าช่องว่างยังอยู่ ย้ายงบมาโพสต์ 1 ได้คนเข้าโปรไฟล์เพิ่มโดยใช้เงินเท่าเดิม']
       ]}}
   ]},
 
@@ -1016,9 +1028,8 @@ const WEEKS = [
             ['แท็บเล็ต',{n:8.97,dec:2},{n:5,dec:0},{n:39,dec:0},{n:0.4,dec:1,suf:'%'}]],
       tot:['รวม',{n:2009.30,dec:2},{n:325,dec:0},{n:3142,dec:0},{n:100.0,dec:1,suf:'%'}]}],
 
-    changes:[['ทั้งสัปดาห์','ไม่มีการแก้ไขแคมเปญระหว่างสัปดาห์ · คีย์เวิร์ดยังเป็นชุดเดิม 26 คำเท่ากับสัปดาห์ที่แล้ว'],
-             ['ทั้งสัปดาห์','สถานะแคมเปญในบัญชีขึ้นว่า <b>Eligible (Limited) · limited by budget</b> งบรายวันตั้งไว้ ฿250 แต่ใช้จริงเฉลี่ยวันละ ฿287 · Optimization score 62.65']],
-
+    changes:[['ทั้งสัปดาห์','<b>ไม่ได้แก้แคมเปญเลย</b> คีย์เวิร์ดยังเป็นชุดเดิม 26 คำ','คลิกที่เพิ่มจาก 253 เป็น 325 มาจากตลาดเอง ไม่ใช่เพราะเราปรับอะไร'],
+             ['ทั้งสัปดาห์','<b>สถานะขึ้นว่า Eligible (Limited) · limited by budget</b> งบรายวัน ฿250 แต่ใช้จริงเฉลี่ย ฿287','โฆษณาหยุดแสดงเมื่อเงินของวันนั้นหมด ตัวเลขที่เห็นจึงยังไม่เต็มศักยภาพ']],
     cal:{title:'ปฏิทินการแก้ไข · Website WPC', note:'ปักหมุดเฉพาะเหตุการณ์ที่เกิดในสัปดาห์นี้ · 9–15 ต.ค. 2569 · หมุดวันที่ 16 ต.ค. เป็นงานของรอบนี้ที่ทำเสร็จหลังปิดสัปดาห์',
       lastData:14,
       events:{
@@ -1028,12 +1039,20 @@ const WEEKS = [
       legend:[['#EDE9FA','Google Ads'],['#FDECEC','ปิด / ยกเลิกการตั้งค่า'],['#FFF1DB','รอบประเมิน']]},
 
     plan:{title:'Action Plan · Website WPC',
-      note:'เลือกสถานะ กรอกวันที่และหมายเหตุได้เอง · ติ๊กช่องซ้ายแล้วสถานะจะเปลี่ยนเป็น “เสร็จสิ้น” อัตโนมัติ',
+      note:'ติ๊กช่องซ้ายแล้วสถานะจะเปลี่ยนเป็น “เสร็จสิ้น” อัตโนมัติ · กรอกวันที่และหมายเหตุได้เอง',
       rows:[
-       ['<b>เพิ่มปุ่มกดโทรบนหน้าแรกของเว็บ</b> แก้เบอร์ในหัวเว็บให้เป็นลิงก์ tel:0992424939 และเปิดช่องโทรในปลั๊กอิน Chaty ที่ติดอยู่แล้ว'],
-       ['<b>ตั้ง conversion action คลิกปุ่มโทรบนเว็บ</b> ยิงผ่าน GTM-TB2MKPZ7 เข้า AW-663088607 · ทำได้หลังมีลิงก์ tel: บนหน้าแรกแล้ว'],
-       ['<b>เพิ่ม conversion คลิก Messenger</b> ทำผ่าน GTM วิธีเดียวกับ LINE (ดักคลิกลิงก์ที่มี m.me) ไม่ต้องแตะโค้ดเว็บ'],
-       ['<b>จัดการ “ซื้อสำเร็จ (เว็บ)” ที่สถานะ Misconfigured</b> ตอนนี้เป็น Primary นับเข้าเป้าบัญชีทั้งที่ตั้งค่าไม่สมบูรณ์']
+       ['<b>ใส่ลิงก์ tel:0992424939 ที่หัวเว็บ</b> + เปิดช่องโทรใน Chaty',
+        'คนกดโทรในโฆษณา 13 ครั้ง Google นับไม่ได้',
+        'เห็นสายที่หายไปราว 13 ครั้ง/สัปดาห์'],
+       ['<b>ตั้ง conversion คลิกโทรบนเว็บ</b> ผ่าน GTM-TB2MKPZ7 → AW-663088607 · ทำต่อจากงานที่ 1',
+        'ตอนนี้มี Conversion ตัวเดียวคือคลิก LINE',
+        'ระบบหาคนที่พร้อมโทร ไม่ใช่แค่คนที่จะแชท'],
+       ['<b>ตั้ง conversion คลิก Messenger</b>',
+        'Chaty มีช่อง Messenger แต่ไม่มีใครนับ',
+        'เห็นครบ 3 ช่องทาง รู้ว่าลูกค้าชอบทักทางไหน'],
+       ['<b>แก้ “ซื้อสำเร็จ (เว็บ)” ที่ Misconfigured</b> หรือถอดออกจาก Primary',
+        'ตั้งค่าไม่สมบูรณ์แต่นับเข้าเป้าบัญชี',
+        'ตัวเลข Conversion เชื่อถือได้ ไม่เทงบตามตัวเลขปลอม']
       ]}}
   ]}
  ]}
@@ -1065,6 +1084,27 @@ const MONTH = {
  ],
  wkTotal:[3492.68, 11239.26, 158.51],
  wkGrand:14890.45,
+
+ /* ---------- การ์ดแยกช่องทางของเดือนนี้ ---------- */
+ chTitle:'ค่าโฆษณาเดือนนี้ แยกตามช่องทาง',
+ chSub:'ตุลาคม 2569 · ข้อมูลถึง 15 ต.ค.',
+ chCards:[
+  {n:'Shopee LUCK',  c:'#2E5496', v:11239.26, pct:75.5},
+  {n:'Website WPC',  c:'#5B4BA8', v:3492.68,  pct:23.5},
+  {n:'IG ATELIER',   c:'#A32C63', v:158.51,   pct:1.1}
+ ],
+
+ /* ---------- ค่าโฆษณาย้อนหลังรายเดือน ---------- */
+ histTitle:'ค่าโฆษณาย้อนหลังรายเดือน',
+ histSub:'ยอดที่ถูกตัดจริงของแต่ละเดือน · ดึงจากไฟล์ Monthly Summary ของเดือนนั้น ๆ',
+ histCols:['Shopee LUCK','Website WPC','IG LUCK','IG ATELIER','TikTok LUCK'],
+ histRows:[
+  {m:'ก.ค. 69', v:[9537.03, null, null, null, null], t:9537.03},
+  {m:'ส.ค. 69', v:[4132.76, 3737.58, null, null, 1400.27], t:9270.61},
+  {m:'ก.ย. 69', v:[14960.78, 5000.00, 5696.51, 5513.34, 0], t:31170.63},
+  {m:'ต.ค. 69', r:'ถึง 15 ต.ค.', v:[11239.26, 3492.68, 0, 158.51, 0], t:14890.45, now:1}
+ ],
+ histNote:'ก.ย. เป็นเดือนที่ใช้หนักสุด ฿31,170.63 เพราะยิงพร้อมกัน 4 ช่องทาง · ต.ค. ครึ่งเดือนแรกอยู่ที่ ฿14,890.45 ถ้าอัตราเท่าเดิมทั้งเดือนจะจบราว ฿30,000 · เดือนที่ขึ้น — คือยังไม่ได้ยิงหรือไม่มีตัวเลขบันทึกไว้',
 };
 
 /* ============================================================
@@ -1299,16 +1339,20 @@ function planHTML(p,key){
   var d=planState(key);
   var h='<div class="sec"><div class="sh">'+ic('check')+' '+p.title+'</div>';
   if(p.note)h+='<div class="ss">'+p.note+'</div>';
-  h+='<div class="tw"><table style="min-width:700px"><thead><tr>'+
-     '<th style="width:38px"></th><th style="text-align:left">งานที่ต้องทำ</th><th style="text-align:left;width:150px">สถานะ</th>'+
-     '<th style="text-align:left;width:130px">วันที่ทำจริง</th><th style="text-align:left">หมายเหตุ</th></tr></thead><tbody>';
+  h+='<div class="tw"><table style="min-width:1120px"><thead><tr>'+
+     '<th style="width:38px"></th><th style="text-align:left">งานที่ต้องทำ</th>'+
+     '<th style="text-align:left">สาเหตุ</th><th style="text-align:left">ผลลัพธ์ที่คาด</th>'+
+     '<th style="text-align:left;width:140px">สถานะ</th>'+
+     '<th style="text-align:left;width:122px">วันที่ทำจริง</th><th style="text-align:left;width:110px">หมายเหตุ</th></tr></thead><tbody>';
   p.rows.forEach(function(row,i){
-    var id=key+'-'+i, def=row[1]||{}, v=d[id]||{};
+    var id=key+'-'+i, def=row[3]||{}, v=d[id]||{};
     var cur=v.st||def.st||'todo', on=cur==='done';
     var vdt=(v.dt!==undefined?v.dt:(def.dt||''));
     var vrm=(v.rm!==undefined?v.rm:(def.rm||''));
     h+='<tr><td style="text-align:center"><input type="checkbox" class="apck" data-id="'+id+'" data-key="'+key+'"'+(on?' checked':'')+'></td>'+
        '<td class="aptask'+(on?' done':'')+'">'+row[0]+'</td>'+
+       '<td class="apwhy">'+(row[1]||'—')+'</td>'+
+       '<td class="apres">'+(row[2]||'—')+'</td>'+
        '<td style="text-align:left"><select class="apsel st-'+cur+'" data-id="'+id+'" data-key="'+key+'">'+
          ST_OPTS.map(function(o){return '<option value="'+o[0]+'"'+(o[0]===cur?' selected':'')+'>'+o[1]+'</option>';}).join('')+
        '</select></td>'+
@@ -1318,8 +1362,8 @@ function planHTML(p,key){
   h+='</tbody></table></div><div class="foot" style="padding-top:8px">สถานะที่เห็นตอนเปิดไฟล์ ฝังมากับไฟล์แล้ว ทุกคนที่เปิดจะเห็นเหมือนกัน · ถ้าแก้เพิ่มเอง จะเก็บไว้ในเบราว์เซอร์เครื่องที่แก้เท่านั้น คนอื่นไม่เห็น · อยากให้ทีมเห็นด้วย ส่งข้อความมา เดี๋ยวฝังลงไฟล์ให้</div></div>';
   return h;
 }
-function planState(key){try{return JSON.parse(localStorage.getItem('apfield-2569-10-v9-'+key)||'{}');}catch(e){return {};}}
-function planSave(key,s){try{localStorage.setItem('apfield-2569-10-v9-'+key,JSON.stringify(s));}catch(e){}}
+function planState(key){try{return JSON.parse(localStorage.getItem('apfield-2569-10-v10-'+key)||'{}');}catch(e){return {};}}
+function planSave(key,s){try{localStorage.setItem('apfield-2569-10-v10-'+key,JSON.stringify(s));}catch(e){}}
 function planSet(key,id,patch){var s=planState(key); s[id]=Object.assign({},s[id]||{},patch); planSave(key,s); return s[id];}
 
 /* ---- ช่องทาง ---- */
@@ -1338,8 +1382,10 @@ function channelHTML(ch){
     d=kpiRow(ch)+vsHTML(ch.vs);
     (ch.tables||[]).forEach(function(t){d+=(t.struct?structHTML(t):tableHTML(t));});
     if(ch.changes&&ch.changes.length){
-      d+='<div class="sec"><div class="sh">'+ic('cal')+' สิ่งที่ปรับระหว่างสัปดาห์</div><div class="tw"><table style="min-width:420px"><thead><tr><th>วันที่</th><th style="text-align:left">การเปลี่ยนแปลง</th></tr></thead><tbody>'+
-        ch.changes.map(function(c){return '<tr><td>'+c[0]+'</td><td style="text-align:left;white-space:normal;font-weight:500;color:#3E4A5C">'+c[1]+'</td></tr>';}).join('')+
+      d+='<div class="sec"><div class="sh">'+ic('cal')+' สิ่งที่ปรับระหว่างสัปดาห์</div><div class="tw"><table style="min-width:700px"><thead><tr><th style="width:92px">วันที่</th><th style="text-align:left">การเปลี่ยนแปลง</th><th style="text-align:left">ผลที่ตามมา</th></tr></thead><tbody>'+
+        ch.changes.map(function(c){return '<tr><td><b>'+c[0]+'</b></td>'+
+          '<td style="text-align:left;white-space:normal;font-weight:500;color:#3E4A5C">'+c[1]+'</td>'+
+          '<td style="text-align:left;white-space:normal;font-weight:500;color:#3E4A5C">'+(c[2]||'—')+'</td></tr>';}).join('')+
         '</tbody></table></div></div>';
     }
     if(ch.notes&&ch.notes.length){
@@ -1483,6 +1529,27 @@ function monthPane(){
      M.wkTotal.map(function(x){return '<td><b>฿'+fmt(x,2)+'</b></td>';}).join('')+
      '<td><b>฿'+fmt(M.wkGrand,2)+'</b></td></tr>';
   h+='</tbody></table></div></div>';
+
+  /* ---- การ์ดแยกช่องทางของเดือนนี้ ---- */
+  h+='<div class="card"><div class="sh">'+ic('sum')+' '+M.chTitle+'</div><div class="ss">'+M.chSub+'</div>';
+  h+='<div class="mcards">'+M.chCards.map(function(c){
+    return '<div class="mc2" style="--mc:'+c.c+'"><div class="l">'+c.n+'</div>'+
+           '<div class="v">฿'+fmt(c.v,2)+'</div>'+
+           '<div class="p">'+c.pct.toFixed(1)+'% ของเดือนนี้</div>'+
+           '<div class="mbar"><i style="width:'+c.pct+'%"></i></div></div>';
+  }).join('')+'</div></div>';
+
+  /* ---- ค่าโฆษณาย้อนหลังรายเดือน ---- */
+  h+='<div class="card"><div class="sh">'+ic('chart')+' '+M.histTitle+'</div><div class="ss">'+M.histSub+'</div>';
+  h+='<div class="tw"><table style="min-width:760px"><thead><tr><th style="text-align:left">เดือน</th>'+
+     M.histCols.map(function(c){return '<th>'+c+'</th>';}).join('')+
+     '<th>รวมทั้งเดือน</th></tr></thead><tbody>';
+  M.histRows.forEach(function(r){
+    h+='<tr'+(r.now?' class="tot"':'')+'><td style="text-align:left"><b>'+r.m+'</b>'+(r.r?'<span class="sub">'+r.r+'</span>':'')+'</td>'+
+       r.v.map(function(x){return '<td>'+(x===null?'<span style="color:#C3CDDD">—</span>':'฿'+fmt(x,2))+'</td>';}).join('')+
+       '<td><b>฿'+fmt(r.t,2)+'</b></td></tr>';
+  });
+  h+='</tbody></table></div><div class="note">'+M.histNote+'</div></div>';
   return h;
 }
 
